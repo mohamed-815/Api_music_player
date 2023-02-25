@@ -5,6 +5,8 @@ import 'package:flutter_application_1/controller/currentfind.dart';
 import 'package:flutter_application_1/view/albums/albums.dart';
 import 'package:flutter_application_1/view/home_screen/homescreen.dart';
 import 'package:flutter_application_1/view/song_list/songlist.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:marquee/marquee.dart';
 
 class PlayScreen extends StatelessWidget {
@@ -13,7 +15,6 @@ class PlayScreen extends StatelessWidget {
   List<Audio> audiosongs;
 
   int? index;
-//  final AsyncSnapshot<List<SongModel>>? item;
 
   PlayScreen({
     Key? key,
@@ -34,15 +35,13 @@ class PlayScreen extends StatelessWidget {
 
   int count2 = 1;
 
-  // Future<void> songPlayNow() async {
-
   @override
   Widget build(BuildContext context) {
     final double screenhight = MediaQuery.of(context).size.height;
     final double screenwidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      backgroundColor: const Color(0xFF2F3E46),
+      backgroundColor: Color.fromARGB(255, 8, 8, 8),
       body: audioplayer.builderCurrent(builder: (context, Playing playing) {
         final curentsongdetail = find(audiosongs, playing.audio.assetAudioPath);
 
@@ -58,14 +57,9 @@ class PlayScreen extends StatelessWidget {
               SizedBox(
                 height: screenhight / 35,
               ),
-
               ListTile(
                 leading: GestureDetector(
-                  onTap: () => Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: ((context) => const MyHomePage())),
-                      (route) => false),
+                  onTap: () => Get.back(),
                   child: CircleAvatar(
                     backgroundColor: Colors.white.withOpacity(.1),
                     child: const Center(
@@ -87,82 +81,31 @@ class PlayScreen extends StatelessWidget {
                         fit: BoxFit.cover,
                         image: NetworkImage(
                             curentsongdetail.metas.image!.path.toString()))),
-
-                //  child:
-
-                /*
-                QueryArtworkWidget(
-                    nullArtworkWidget: Container(
-                        height: screenhight / 3,
-                        width: screenwidth / 2,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(25),
-                            image: const DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage(
-                                    'assets/best-rap-songs-1583527287.png')))),
-                    id: int.parse(curentsongdetail.metas.id.toString()),
-                    type: ArtworkType.AUDIO),
-                    */
               ),
               SizedBox(
                 height: screenhight / 20,
               ),
-              // widget.songdetailsshow == null
-              //     ?
-              //
-
-              // Container(
-              //   width: screenwidth / 1.5,
-              //   height: screenhight / 30,
-              //   child: Marquee(
-              //     velocity: 20,
-              //     text:
-
-              //     curentsongdetail.metas.title!,
-              //     style: const TextStyle(fontSize: 20, color: Colors.white),
-              //   ),
-              // ),
-
+              Container(
+                width: screenwidth / 1.5,
+                height: screenhight / 30,
+                child: Marquee(
+                  velocity: 20,
+                  text: curentsongdetail.metas.title!,
+                  style: const TextStyle(fontSize: 20, color: Colors.white),
+                ),
+              ),
               SizedBox(
                 height: screenhight / 60,
               ),
-              //  Text(
-              //     widget.songdetailsshow!.metas.title!,
-              //     style: TextStyle(fontSize: 16, color: Colors.white),
-              //   ),
-              //widget.songdetailsshow == null
-
-              //   ?
-
-              //  curentsongdetail.metas.artist == '<unknown>'
-              //?
-              const Text(
-                'unknown artist',
-                style: TextStyle(fontSize: 12, color: Colors.white),
-              )
-              // :
-
-              //  Text(
-              //     curentsongdetail.metas.artist!,
-              //     style: const TextStyle(fontSize: 12, color: Colors.white),
-              //   ),
-
-              //  Text(
-              //     widget.songdetailsshow!.metas.artist!,
-              //     style: TextStyle(color: Colors.white),
-              //   ),
-              // Container(
-              //   margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-              //   child: Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Text(c.inSeconds.toString().split(".")[0]),
-              //       Text(duration.inSeconds.toString().split(".")[0]),
-              //     ],
-              //   ),
-              // ),
-              ,
+              curentsongdetail.metas.artist == '<unknown>'
+                  ? const Text(
+                      'unknown artist',
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    )
+                  : Text(
+                      curentsongdetail.metas.artist!,
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
+                    ),
               SizedBox(
                 height: screenhight / 50,
               ),
@@ -195,11 +138,8 @@ class PlayScreen extends StatelessWidget {
               Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [],
+                  children: const [],
                 ),
-              ),
-              SizedBox(
-                height: screenhight / 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -212,33 +152,22 @@ class PlayScreen extends StatelessWidget {
                     },
                     onTap: () async {
                       audioplayer.previous();
-                      // count2++;
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: ((context) => widget.index! > 0
-                      //             ? DetailSong(
-                      //                 songdetailsshow:
-                      //                     audioconvertedsongs[widget.index! - 1],
-                      //                 index: widget.index! - 1,
-                      //                 audioPlayer: widget.audioPlayer)
-                      //             : MainScreen())));
                     },
-                    child: Icon(
+                    child: const Icon(
                       Icons.skip_previous,
                       size: 30,
+                      color: Colors.white,
                     ),
                   ),
                   SizedBox(
                     width: screenwidth / 30,
                   ),
-
                   PlayerBuilder.isPlaying(
                       player: audioplayer,
                       builder: (context, isPlaying) {
                         return GestureDetector(
                           onTap: () async {
-                            // await audioplayer.playOrPause();
+                            await audioplayer.playOrPause();
                           },
                           child: CircleAvatar(
                               radius: 30,
@@ -256,61 +185,38 @@ class PlayScreen extends StatelessWidget {
                                     )),
                         );
                       }),
-
-                  // child: GestureDetector(
-                  //   onTap: () => setState(() {
-                  //     if (isplay == true) {
-                  //       audioplayer.pause();
-                  //       isplay = false;
-                  //     } else {
-                  //       audioplayer.play();
-                  //       isplay = true;
-                  //     }
-                  //   }),
-                  //   child: CircleAvatar(
-                  //       radius: 30,
-                  //       backgroundColor: Colors.grey.shade200,
-                  //       child: isplay
-                  //           ? Icon(
-                  //               size: 40,
-                  //               Icons.pause,
-                  //               color: Colors.black,
-                  //             )
-                  //           : Icon(
-                  //               Icons.play_arrow,
-                  //               size: 40,
-                  //               color: Colors.black,
-                  //             )),
-                  // ),
-
                   SizedBox(
                     width: screenwidth / 30,
                   ),
                   GestureDetector(
                       onDoubleTapCancel: () {},
                       onDoubleTapDown: ((details) {}),
-                      onDoubleTap: () async {
-                        //  await
-                        // audioplayer
-                        //     .seekBy(Duration(seconds: 5));
-                      },
+                      onDoubleTap: () async {},
                       onTap: () async {
-                        // count1++;
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: ((context) => widget.index! <
-                        //                 audioconvertedsongs.length - 1
-                        //             ? DetailSong(
-                        //                 songdetailsshow:
-                        //                     audioconvertedsongs[widget.index! + 1],
-                        //                 index: widget.index! + 1,
-                        //                 audioPlayer: widget.audioPlayer)
-                        //             : MainScreen())));
+                        audioplayer.next();
                       },
-                      child: const Icon(Icons.skip_next, size: 30)),
+                      child: const Icon(
+                        Icons.skip_next,
+                        size: 30,
+                        color: Colors.white,
+                      )),
                 ],
               ),
+              PlayerBuilder.isPlaying(
+                  player: audioplayer,
+                  builder: (context, isPlaying) {
+                    return GestureDetector(
+                      child: Container(
+                          height: 150.h,
+                          color: Colors.grey.shade200,
+                          child: isPlaying
+                              ? Image.network(
+                                  'https://gifimage.net/wp-content/uploads/2018/10/audio-spectrum-gif.gif',
+                                  fit: BoxFit.contain,
+                                )
+                              : const SizedBox()),
+                    );
+                  }),
             ],
           ));
         }
