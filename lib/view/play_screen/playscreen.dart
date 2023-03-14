@@ -207,7 +207,7 @@ class PlayScreen extends StatelessWidget {
                   builder: (context, isPlaying) {
                     return GestureDetector(
                       child: Container(
-                          height: 150.h,
+                          height: 100.h,
                           color: Colors.grey.shade200,
                           child: isPlaying
                               ? Image.network(

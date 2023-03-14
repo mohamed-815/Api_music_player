@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SimpleItem extends StatelessWidget {
   SimpleItem({
+    required this.borderadiusGeometry,
     this.image,
     required this.itemname,
     Key? key,
@@ -13,6 +14,7 @@ class SimpleItem extends StatelessWidget {
   String? itemname;
 
   String? image;
+  BorderRadiusGeometry borderadiusGeometry;
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +29,14 @@ class SimpleItem extends StatelessWidget {
           Container(
             decoration: BoxDecoration(
                 color: Colors.blue,
-                borderRadius: BorderRadius.circular(7),
+                borderRadius: borderadiusGeometry,
                 image: DecorationImage(
                     image: NetworkImage(image != null
                         ? image!
                         : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQz2vlb6hWMPrKdrtMZmLIPGJQd67d4VhIeMA&usqp=CAU"),
                     fit: BoxFit.cover)),
             height: shieght / 7,
-            width: swidth / 1.5,
+            width: swidth / 1.8,
 
             // child: Image.asset(
             //   image,

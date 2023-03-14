@@ -4,6 +4,7 @@ import 'package:flutter_application_1/const/const.dart';
 import 'package:flutter_application_1/controller/songplayfuntion.dart';
 import 'package:flutter_application_1/view/play_screen/playscreen.dart';
 import 'package:flutter_application_1/view/song_list/songlistservice/songlistservice.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 List<Audio> audioconvertedsongs = [];
@@ -24,42 +25,41 @@ class _SongListState extends State<SongList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Get.back();
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        elevation: 0,
+        title: const Text(
+          "Songs",
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: SafeArea(
         child: Column(
           children: [
-            khieght,
-            Row(
-              children: [
-                CircleAvatar(
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    )),
-                Expanded(
-                  child: Center(
-                    child: Text(
-                      "All Songs",
-                      style: TextStyle(
-                          fontSize: 20,
-                          color: Color.fromARGB(255, 18, 18, 18),
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            khieght,
             FutureBuilder(
                 future: SongListservice().Fechthesong(widget.id),
                 builder: (context, snapshot) {
                   if (snapshot.hasError) {
-                    return Center(
+                    return const Center(
                       child: Text("Some Thing Went Wrong"),
                     );
                   } else if (snapshot.hasData) {
                     return Expanded(
                         child: ListView.builder(
+                            padding: EdgeInsets.all(13.h),
                             itemCount: snapshot.data?.length,
                             itemBuilder: ((context, index) {
                               final song = snapshot.data![index];
@@ -77,7 +77,7 @@ class _SongListState extends State<SongList> {
                               }
 
                               return Padding(
-                                padding: const EdgeInsets.all(8.0),
+                                padding: EdgeInsets.all(6.h),
                                 child: Card(
                                   child: ListTile(
                                     onTap: () async {
@@ -106,7 +106,11 @@ class _SongListState extends State<SongList> {
                               );
                             })));
                   } else {
-                    return CircularProgressIndicator();
+                    return Expanded(
+                        child: Center(
+                            child: const CircularProgressIndicator(
+                      color: Colors.white,
+                    )));
                   }
                 })
           ],

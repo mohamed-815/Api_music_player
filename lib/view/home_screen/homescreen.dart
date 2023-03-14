@@ -28,7 +28,17 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Color.fromARGB(255, 13, 13, 14),
+        appBar: AppBar(
+          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          elevation: 0,
+          title: Center(
+            child: Text(
+              'Take Your Music',
+              //  style: TextStyle(color: Colors.black),
+            ),
+          ),
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -45,9 +55,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     if (snapshot.hasData) {
                       return Expanded(
                         child: GridView.count(
+                          padding: EdgeInsets.all(20),
                           crossAxisCount: 2,
                           mainAxisSpacing: 20.h,
-                          crossAxisSpacing: 4.5.h,
+                          crossAxisSpacing: 18.h,
                           children:
                               List.generate(snapshot.data!.length, (index) {
                             //   final item = showingitems[index];
@@ -63,6 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                 }
                               },
                               child: SimpleItem(
+                                borderadiusGeometry: BorderRadius.circular(160),
                                 itemname: item!.genre.toString(),
                               ),
                             );
@@ -70,7 +82,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       );
                     } else {
-                      return CircularProgressIndicator();
+                      return const Expanded(
+                          child: Center(
+                              child: CircularProgressIndicator(
+                        color: Colors.white,
+                      )));
                     }
                   })
             ],

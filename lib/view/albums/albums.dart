@@ -28,13 +28,34 @@ class _AlbumsPageState extends State<AlbumsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          leading: GestureDetector(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.black,
+          centerTitle: true,
+          elevation: 0,
+          title: const Text(
+            "Albums",
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Expanded(
                 child: GridView.count(
+                  padding: EdgeInsets.all(18.w),
                   crossAxisCount: 2,
                   mainAxisSpacing: 20.h,
                   crossAxisSpacing: 4.5.h,
@@ -54,6 +75,7 @@ class _AlbumsPageState extends State<AlbumsPage> {
                       child: SimpleItem(
                         itemname: item.title,
                         image: item.image,
+                        borderadiusGeometry: BorderRadius.circular(6),
                       ),
                     );
                   }),
