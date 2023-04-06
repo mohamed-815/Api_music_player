@@ -1,6 +1,6 @@
-import 'package:flutter_application_1/const/const.dart';
+import 'package:flutter_application_1/core/const/const.dart';
 import 'package:flutter_application_1/model/gridclass.dart';
-import 'package:get/get.dart';
+
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 

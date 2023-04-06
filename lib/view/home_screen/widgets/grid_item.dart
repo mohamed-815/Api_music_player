@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/const/const.dart';
+import 'package:flutter_application_1/core/const/const.dart';
 import 'package:flutter_application_1/view/home_screen/widgets/text.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SimpleItem extends StatelessWidget {
   SimpleItem({
@@ -22,7 +21,7 @@ class SimpleItem extends StatelessWidget {
     final swidth = MediaQuery.of(context).size.width;
     return Container(
       width: swidth / 2.3,
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       //margin: EdgeInsets.all(3),
       child: Column(
         children: [
@@ -37,16 +36,11 @@ class SimpleItem extends StatelessWidget {
                     fit: BoxFit.cover)),
             height: shieght / 7,
             width: swidth / 1.8,
-
-            // child: Image.asset(
-            //   image,
-            //   fit: BoxFit.cover,
-            // ),
           ),
           khieght,
-          Container(
-              width: 130.w,
-              child: Center(child: smalltextboldWidjets25(Title: itemname!)))
+          SizedBox(
+              width: 130,
+              child: Center(child: SmallTextBoldWidjets25(Title: itemname!)))
         ],
       ),
     );

@@ -11,7 +11,7 @@ class SongsModel {
     if (json['album_songs'] != null) {
       albumSongs = <AlbumSongs>[];
       json['album_songs'].forEach((v) {
-        albumSongs!.add(new AlbumSongs.fromJson(v));
+        albumSongs!.add(AlbumSongs.fromJson(v));
       });
     }
   }

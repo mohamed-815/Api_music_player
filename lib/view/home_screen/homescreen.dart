@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/view/albums/albums.dart';
 import 'package:flutter_application_1/view/home_screen/HomeService/homeservice.dart';
 import 'package:flutter_application_1/view/home_screen/widgets/grid_item.dart';
-import 'package:flutter_application_1/view/song_list/songlist.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -19,23 +16,19 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
-
-  int _counter = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color.fromARGB(255, 13, 13, 14),
+        backgroundColor: const Color.fromARGB(255, 13, 13, 14),
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(255, 0, 0, 0),
+          backgroundColor: const Color.fromARGB(255, 0, 0, 0),
           elevation: 0,
-          title: Center(
+          title: const Center(
             child: Text(
               'Take Your Music',
-              //  style: TextStyle(color: Colors.black),
             ),
           ),
         ),
@@ -47,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   future: HomeService().FechtheId(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Center(
+                      return const Center(
                         child: Text('Some Thing Went Wrong'),
                       );
                     }
@@ -55,13 +48,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     if (snapshot.hasData) {
                       return Expanded(
                         child: GridView.count(
-                          padding: EdgeInsets.all(20),
+                          padding: const EdgeInsets.all(20),
                           crossAxisCount: 2,
-                          mainAxisSpacing: 20.h,
-                          crossAxisSpacing: 18.h,
+                          mainAxisSpacing: 20,
+                          crossAxisSpacing: 18,
                           children:
                               List.generate(snapshot.data!.length, (index) {
-                            //   final item = showingitems[index];
                             final item = snapshot.data?[index];
                             return GestureDetector(
                               onTap: () {
@@ -94,23 +86,3 @@ class _MyHomePageState extends State<MyHomePage> {
         ));
   }
 }
-
-final showingitems = [
-  "new one",
-  "best song",
-  "rap",
-  "trance",
-  "beach Music",
-  "Hot Songs",
-  "best Songs"
-];
-
-final songs = [
-  "thulli",
-  "nilavu",
-  "rap",
-  "trance",
-  "beach Music",
-  "Hot Songs",
-  "best Songs"
-];

@@ -1,7 +1,5 @@
-import 'package:flutter_application_1/const/const.dart';
-import 'package:flutter_application_1/model/gridclass.dart';
+import 'package:flutter_application_1/core/const/const.dart';
 import 'package:flutter_application_1/model/songmodel.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -15,10 +13,6 @@ class SongListservice {
     if (response.statusCode == 200) {
       Map<String, dynamic> json = jsonDecode(response.body);
 
-      print('newjson.................song detail');
-      print(json);
-      print('..........');
-      print(SongsModel.fromJson(json).albumSongs);
       return SongsModel.fromJson(json).albumSongs;
     } else {
       throw Exception('Failed to fetch music genres');
